@@ -1,28 +1,18 @@
 package com.example.helloworld.impl
 
-import com.example.helloworld.api
+import akka.NotUsed
 import com.example.helloworld.api.HelloWorldService
 import com.lightbend.lagom.scaladsl.api.ServiceCall
-import com.lightbend.lagom.scaladsl.persistence.{EventStreamElement, PersistentEntityRegistry}
+
+import scala.concurrent.Future
 
 /**
   * Implementation of the HelloWorldService.
   */
-class HelloWorldServiceImpl(persistentEntityRegistry: PersistentEntityRegistry) extends HelloWorldService {
+class HelloWorldServiceImpl extends HelloWorldService {
 
-  override def hello(id: String) = ServiceCall { _ =>
-    // Look up the Hello World entity for the given ID.
-    val ref = persistentEntityRegistry.refFor[HelloWorldEntity](id)
-
-    // Ask the entity the Hello command.
-    ref.ask(Hello(id))
+  override def hello(id: String): ServiceCall[NotUsed, String] = ServiceCall { _ =>
+    Future.successful(id.toString)
   }
 
-  override def useGreeting(id: String) = ServiceCall { request =>
-    // Look up the Hello World entity for the given ID.
-    val ref = persistentEntityRegistry.refFor[HelloWorldEntity](id)
-
-    // Tell the entity to use the greeting message specified.
-    ref.ask(UseGreetingMessage(request.message))
-  }
 }

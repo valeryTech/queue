@@ -1,11 +1,11 @@
 package com.example.helloworld.api
 
 import akka.{Done, NotUsed}
-
+import com.lightbend.lagom.scaladsl.api.transport.Method
 import com.lightbend.lagom.scaladsl.api.{Descriptor, Service, ServiceCall}
 import play.api.libs.json.{Format, Json}
 
-object HelloWorldService  {
+object HelloWorldService {
   val TOPIC_NAME = "greetings"
 }
 
@@ -22,23 +22,14 @@ trait HelloWorldService extends Service {
     */
   def hello(id: String): ServiceCall[NotUsed, String]
 
-  /**
-    * Example: curl -H "Content-Type: application/json" -X POST -d '{"message":
-    * "Hi"}' http://localhost:9000/api/hello/Alice
-    */
-  def useGreeting(id: String): ServiceCall[GreetingMessage, Done]
-
 
   override final def descriptor: Descriptor = {
     import Service._
-    // @formatter:off
     named("hello-world")
       .withCalls(
-        pathCall("/api/hello/:id", hello _),
-        pathCall("/api/hello/:id", useGreeting _)
+        restCall(Method.GET, "/api/hello/:id", hello _),
       )
       .withAutoAcl(true)
-    // @formatter:on
   }
 }
 
@@ -55,7 +46,6 @@ object GreetingMessage {
     */
   implicit val format: Format[GreetingMessage] = Json.format[GreetingMessage]
 }
-
 
 
 /**

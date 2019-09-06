@@ -5,8 +5,7 @@ import com.lightbend.lagom.scaladsl.api.transport.Method
 import com.lightbend.lagom.scaladsl.api.{Descriptor, Service, ServiceCall}
 import play.api.libs.json.{Format, Json}
 
-object HelloWorldService {
-  val TOPIC_NAME = "greetings"
+object QueueService {
 }
 
 /**
@@ -15,7 +14,7 @@ object HelloWorldService {
   * This describes everything that Lagom needs to know about how to serve and
   * consume the HelloWorldService.
   */
-trait HelloWorldService extends Service {
+trait QueueService extends Service {
 
   /**
     * Example: curl http://localhost:9000/api/hello/Alice

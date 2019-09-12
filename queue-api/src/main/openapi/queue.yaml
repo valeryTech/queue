@@ -1,0 +1,60 @@
+swagger: "2.0"
+info:
+  description: "Service provides queue numbers for incoming checks"
+  version: "1.0.0"
+  title: "Online check queue service"
+host: localhost:9000
+basePath: "/api"
+tags:
+  - name: "check"
+    description: "Check"
+schemes:
+  - "http"
+
+paths:
+  /check:
+    post:
+      tags:
+        - "check"
+      summary: "Дать номер чека"
+      operationId: "getPosition"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "check"
+          in: body
+          description: Содержание чека
+          required: true
+          schema: {$ref: '#/definitions/Check'}
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Что то пошло не так"
+          schema:
+            $ref: "#/definitions/Error"
+
+definitions:
+
+  Error:
+    type: object
+    required:
+      - name
+      - detail
+    properties:
+      name:
+        type: string
+      detail:
+        type: string
+
+  Check:
+    type: object
+    properties:
+      id:
+        type: string
+      codes:
+        type: array
+        items:
+          type: string

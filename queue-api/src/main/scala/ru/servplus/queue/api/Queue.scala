@@ -1,11 +1,11 @@
-package com.example.helloworld.api
+package ru.servplus.queue.api
 
 import akka.{Done, NotUsed}
 import com.lightbend.lagom.scaladsl.api.transport.Method
 import com.lightbend.lagom.scaladsl.api.{Descriptor, Service, ServiceCall}
 import play.api.libs.json.{Format, Json}
 
-object QueueService {
+object Queue {
 }
 
 /**
@@ -14,7 +14,7 @@ object QueueService {
   * This describes everything that Lagom needs to know about how to serve and
   * consume the QueueService.
   */
-trait QueueService extends Service {
+trait Queue extends Service {
 
   /**
     * Example: curl http://localhost:9000/api/number
@@ -24,9 +24,9 @@ trait QueueService extends Service {
 
   override final def descriptor: Descriptor = {
     import Service._
-    named("hello-world")
+    named("queue-service")
       .withCalls(
-        restCall(Method.GET, "/api/hello/:id", hello _),
+        restCall(Method.GET, "/api/number/:id", hello _),
       )
       .withAutoAcl(true)
   }

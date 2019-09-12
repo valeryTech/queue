@@ -6,7 +6,8 @@ import com.lightbend.lagom.scaladsl.server._
 import com.lightbend.lagom.scaladsl.devmode.LagomDevModeComponents
 import play.api.libs.ws.ahc.AhcWSComponents
 import com.softwaremill.macwire._
-import ru.servplus.queue.api.Queue
+
+import ru.servplus.server.api.queue.generate.{Check, `QueueApi`}
 
 class QueueServiceLoader
   extends LagomApplicationLoader {
@@ -19,7 +20,7 @@ class QueueServiceLoader
   override def loadDevMode(context: LagomApplicationContext): LagomApplication =
     new QueueServiceApplication(context) with LagomDevModeComponents
 
-  override def describeService = Some(readDescriptor[Queue])
+  override def describeService = Some(readDescriptor[`QueueApi`])
 }
 
 abstract class QueueServiceApplication(context: LagomApplicationContext)
@@ -27,5 +28,5 @@ abstract class QueueServiceApplication(context: LagomApplicationContext)
     with AhcWSComponents {
 
   // Bind the service that this server provides
-  override lazy val lagomServer: LagomServer = serverFor[Queue](wire[QueueImpl])
+  override lazy val lagomServer: LagomServer = serverFor[`QueueApi`](wire[QueueImpl])
 }

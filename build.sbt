@@ -38,7 +38,7 @@ lazy val `queue-api` = (project in file("queue-api"))
   .enablePlugins(LagomOpenApiPlugin)
   .settings(defaultSettings)
   .settings(
-    organization := "ru.servplus.api.queue.generate",
+    organization := "ru.servplus.server.api.queue.generate",
     libraryDependencies ++= Seq(
       lagomScaladslApi
     ),

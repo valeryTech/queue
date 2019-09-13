@@ -31,6 +31,8 @@ paths:
       responses:
         200:
           description: "OK"
+          schema:
+            type: string
         400:
           description: "Что то пошло не так"
           schema:

@@ -1,5 +1,12 @@
 package ru.servplus.queue.impl
 
-class QueueSpec {
+import org.scalatest.{FlatSpec, Matchers}
 
+class QueueSpec extends FlatSpec with Matchers {
+
+//
+//
+//  test("CubeCalculator.cube") {
+//    assert(true)
+//  }
 }

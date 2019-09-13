@@ -2,12 +2,11 @@ package ru.servplus.queue.impl
 
 import com.lightbend.lagom.scaladsl.api.ServiceLocator
 import com.lightbend.lagom.scaladsl.api.ServiceLocator.NoServiceLocator
-import com.lightbend.lagom.scaladsl.server._
 import com.lightbend.lagom.scaladsl.devmode.LagomDevModeComponents
-import play.api.libs.ws.ahc.AhcWSComponents
+import com.lightbend.lagom.scaladsl.server._
 import com.softwaremill.macwire._
-
-import ru.servplus.server.api.queue.generate.{Check, `QueueApi`}
+import play.api.libs.ws.ahc.AhcWSComponents
+import ru.servplus.server.api.queue.generate.`QueueApi`
 
 class QueueServiceLoader
   extends LagomApplicationLoader {
